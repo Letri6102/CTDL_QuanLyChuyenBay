@@ -20,14 +20,18 @@ int main()
 	KhoiTaoQueue(q);
 	Ve x;
 
+	DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
+	DocFileKhachHang(dsKhachHang, soluongKhachHang);
+	DocFileTaiKhoan(dsTaiKhoan, soluongTaiKhoan);
+	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
 	//Demo + Test lỗi
 	int luachon;
 	
 	do
 	{
 		cout << "\n\t\t ============== TEST LOI ==============" << endl;
-		cout << "\t1.Doc xuat file Khach Hang" << endl;
-		cout << "\t2.Them khach hang ( xu ly dat ve)" << endl;
+		cout << "\t1.Hien thi danh sach chuyen bay" << endl;
+		cout << "\t2.Dat Ve" << endl;
 		cout << "\t3.Dang nhap Admin" << endl;
 		cout << "\t4.Xuat DS Chuyen bay" << endl;
 		cout << "\t5.Test tao ve" << endl;
@@ -37,20 +41,18 @@ int main()
 		cout << "Nhap lua chon = ";
 		cin >> luachon;
 
-		DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
-		DocFileKhachHang(dsKhachHang, soluongKhachHang);
-		DocFileTaiKhoan(dsTaiKhoan, soluongTaiKhoan);
+
+		
 		switch (luachon)
 		{
 		case 1:
 		{
-		
-			XuatKhachHang(dsKhachHang, soluongKhachHang);
+			XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
 			break;
 		}
 		case 2:
 		{
-			ThemKhachHang(dsKhachHang, soluongKhachHang);
+			NhapQueue(q, x);
 			break;
 		}
 		case 3:
@@ -65,14 +67,24 @@ int main()
 		}
 		case 5:
 		{
-			string Vt = "";
-			cout << taoMaVe(dsChuyenBay, soluongChuyenBay,Vt);
+			//inVe(x);
 			break;
 		}
 		case 6:
 		{
 			MenuQueue(q);
 			break;
+		}
+		case 7:
+		{
+			string MCB;
+			cin >> MCB;
+			ChuyenBay *h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MCB);
+			int soGhe;
+			cin >> soGhe;
+			DatGhe(h, soGhe);
+			DatGhe(h, 15);
+			cout << h->SanBayDen;
 		}
 		default:
 			break;
