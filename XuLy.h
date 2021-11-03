@@ -2,12 +2,11 @@
 #pragma warning(disable:4996)
 
 #include<iostream>
-#include<string>
-#include<fstream>
 #include<conio.h>
 #include<Windows.h>
 #include "QuanLy.h"
 #include "DatTra.h"
+#include "Design.h"
 
 using namespace std;
 
@@ -35,15 +34,17 @@ void DocFileChuyenBay(ChuyenBay* dsChuyenBay[30], int& soluongChuyenBay)
 
 void Xuat1ChuyenBay(ChuyenBay* b)
 {
-	cout << "" << b->MaChuyenBay << "\t" << b->NgayKhoiHanh << "\t" << b->SanBayDen << "\t" << b->TrangThai << "\t" << b->dsVe;
+	cout << "" << b->MaChuyenBay << "\t" << b->NgayKhoiHanh << "\t" << b->SanBayDen << "\t\t" << b->TrangThai << "\t" << b->dsVe;
 }
 
 void XuatDSChuyenBay(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay)
 {
+	int y = Tuong_tren;
+	out_toando(Tuong_phai + 2, ++y, "  MaCB       Ngay Khoi Hanh    San Bay Den       TrangThai   SoVe ");
 	for (int i = 0; i < soluongChuyenBay; i++)
 	{
+		gotoXY(Tuong_phai + 4, ++y);
 		Xuat1ChuyenBay(dsChuyenBay[i]);
-		cout << endl;
 	}
 }
 
@@ -57,7 +58,17 @@ ChuyenBay* TimKiemChuyenBay(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay, st
 	//return NULL;
 }
 
-//Khoi tao danh sach ghe trong
+bool checkMaCB(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay, string MCB)
+{
+	for (int i = 0; i < soluongChuyenBay; i++)
+	{
+		if (MCB == dsChuyenBay[i]->MaChuyenBay)
+			return true;
+	}
+	return false;
+}
+
+//---------Xu ly ghe trong
 void GheTrong(ChuyenBay* h)
 {
 	for (int i = 0; i < h->dsVe; i++)
@@ -76,35 +87,65 @@ void KhoiTaoGheTrong(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay)
 	}
 }
 
-//Dat cho ngoi
+void DSGheTrong(ChuyenBay* h)
+{
+	for (int i = 1; i <= 10; i++)
+	{
+		if (h->dsGheTrong[i] == false)
+			cout << i << endl;
+	}
+}
+
+void XuatDSGheTrong(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay, string MaCB)
+{
+	ChuyenBay* h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MaCB);
+	DSGheTrong(h);
+}
+
+//----------Dat cho ngoi
 void DatGhe(ChuyenBay* h, int soGhe)
 {
+	int y = Tuong_tren;
 	if (h->dsGheTrong[soGhe] == false)
 	{
+		setTextColor(10);
 		h->dsGheTrong[soGhe] = true;
-		cout << "Dat so ghe thanh cong!" << endl;
+		out_toando(Tuong_phai + 25, ++y + 15, "Dat so ghe thanh cong!");
 	}
 	else
-		cout << "Ghe nay da co nguoi dat!" << endl;
+	{
+		setTextColor(4);
+		out_toando(Tuong_phai + 25, ++y + 15, "Ghe nay da co nguoi dat!");
+	}
+}
+
+//Xử lý trạng thái máy bay
+bool TrangThai(ChuyenBay* h)
+{
+	if (h->TrangThai == 3 || h->TrangThai == 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 void XuLyTrangThai(ChuyenBay* h)
 {
+	int y = Tuong_tren;
+	setTextColor(4);
 	if (h->TrangThai == 3)
 	{
-		cout << "Chuyen bay nay da hoan tat! Vui long chon chuyen bay khac!" << endl;
+		out_toando(Tuong_phai + 25, ++y + 8, "CHUYEN BAY NAY DA HOAN TAT!");
+		out_toando(Tuong_phai + 22, ++y + 9, " Vui long chon chuyen bay khac!");
 	}
 	else if (h->TrangThai == 0)
 	{
-		cout << "Chuyen bay nay da huy! Vui long chon chuyen bay khac!" << endl;
-	}
-	else 
-	{
-		cout << "Ban da dat ve thanh cong!" << endl;
+		out_toando(Tuong_phai + 25, ++y + 8, "CHUYEN BAY NAY DA BI HUY! ");
+		out_toando(Tuong_phai + 22, ++y + 9, "Vui long chon chuyen bay khac!");
 	}
 }
 
-//-----------Ve
+//-----------Vé
 string taoMaVe(ChuyenBay* h, string soGhe)
 {
 	string a = "";
@@ -189,46 +230,57 @@ void ThemKhachHang(KhachHang* dsKhachHang[60], int& soluongKhachHang)
 	soluongKhachHang++;
 }
 
-bool checkDatVe(KhachHang* dsKhachHang[30], int& soluongKhachHang, Ve &x)
-{
-	for (int i = 0; i < soluongKhachHang; i++)
-	{
-		if (x.ThongTinKhachHang.HoTen == dsKhachHang[i]->HoTen)
-			return true;
-	}
-	return false;
-}
 
 //Xu ly Dat ve
 KhachHang* dsKhachHang[30];
 int soluongKhachHang;
 ChuyenBay* dsChuyenBay[30];
 int soluongChuyenBay;
+
+//Đặt vé
 void NhapQueue(QUEUE& q, Ve x)
 {
-	cout << "\n\t\tDAT VE ";
-	cout << "\nNhap ma chuyen bay: ";
+	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
+	DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
+	setTextColor(11);
+	cls_sreen();
+	int y = Tuong_tren;
+	out_toando(Tuong_phai + 13, ++y + 2, "============== DAT VE MAY BAY ==============");
+	out_toando(Tuong_phai + 10, ++y + 5, "Nhap ma chuyen bay: ");
 	cin >> x.ThongTinChuyenBay.MaChuyenBay;
 	string MaCB = x.ThongTinChuyenBay.MaChuyenBay;
-	ChuyenBay* h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MaCB);
+	if(checkMaCB(dsChuyenBay, soluongChuyenBay, MaCB))
+	{ 
+		ChuyenBay* h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MaCB);
 
-	cout << "\nHo ten: ";
-	cin >> x.ThongTinKhachHang.HoTen;
-	cout << "\nSo CMND: ";
-	cin >> x.ThongTinKhachHang.CMND;
-
-	int soGhe;
-	cout << "\nNhap so ghe: ";
-	cin >> soGhe;
-	DatGhe(h, soGhe);
-	string maGhe = to_string(soGhe);
-	x.MaVe = taoMaVe(h, maGhe);
-	XuLyTrangThai(h);
-	inVe(x, h, maGhe);
-	system("pause");
-	NODE* p = KhoiTaoNode(x);
-	Push(q, p);
+		if (TrangThai(h))
+		{
+			out_toando(Tuong_phai + 10, ++y + 6, "Nhap ho ten: ");
+			cin >> x.ThongTinKhachHang.HoTen;
+			out_toando(Tuong_phai + 10, ++y + 7, "Nhap so CMND: ");
+			cin >> x.ThongTinKhachHang.CMND;
+			int soGhe;
+			out_toando(Tuong_phai + 10, ++y + 8, "Nhap so ghe: ");
+			cin >> soGhe;
+			DatGhe(h, soGhe);
+			string maGhe = to_string(soGhe);
+			x.MaVe = taoMaVe(h, maGhe);
+			inVe(x, h, maGhe);
+			NODE* p = KhoiTaoNode(x);
+			Push(q, p);
+		}
+		else
+		{
+			XuLyTrangThai(h);
+		}
+	}
+	else
+	{
+		setTextColor(4);
+		out_toando(Tuong_phai + 10, ++y + 6, "KHONG TIM THAY CHUYEN BAY HOP LE !!! ");
+	}
 }
+
 
 void XuatQueue(QUEUE q)
 {
@@ -261,6 +313,7 @@ void MenuQueue(QUEUE& q)
 		cout << "\n\t1. Them ve vao queue - Push";
 		cout << "\n\t2. Xuat danh sach ve ra man hinh - Pop";
 		cout << "\n\t3. Xem thong tin phan tu dau queue - Top";
+		cout << "\n\t4. Xuat danh sach chuyen bay";
 		cout << "\n\t0. Ket thuc";
 		cout << "\n\n\t\t ============== End ==============";
 
@@ -283,6 +336,12 @@ void MenuQueue(QUEUE& q)
 			cout << x.ThongTinChuyenBay.MaChuyenBay << "\t" << x.MaVe << "\t" << x.ThongTinKhachHang.HoTen << "\t" << x.ThongTinKhachHang.CMND;
 			Pop(q, x);
 			system("pause");
+		}
+		else if (luachon == 4)
+		{
+			DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
+			XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
+			break;
 		}
 		else
 		{
@@ -317,19 +376,23 @@ bool checkDangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, s
 	return false;
 }
 
-void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string Password)
+void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string Password, QUEUE& q)
 {
 	char x;
 	int temp = 0;
 	User = "";
 	while (temp < 3)
 	{	
-		system("cls");
-		cout << "\n\t\t ============== DANG NHAP HE THONG ==============" << endl;
-		cout << "\n\t\tUser: ";
+		setTextColor(14);
+		cls_sreen();
+		int y = Tuong_tren;
+		out_toando(Tuong_phai + 13, ++y+5, "============== DANG NHAP HE THONG ==============");
+		gotoXY(Tuong_phai + 4, ++y+5);
+		setTextColor(9);
+		out_toando(Tuong_phai + 10, ++y+5, "User: ");
 		cin >> User;
 		Password = "";
-		cout << "\n\t\tPassword: ";
+		out_toando(Tuong_phai + 10, ++y+6, "Password: ");
 		while (true)
 		{
 			x = _getch(); 
@@ -357,19 +420,23 @@ void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string
 		}
 		if (checkDangNhap(dsTaiKhoan,soluongTaiKhoan,User,Password)) 
 		{
-			//MenuQueue(q);
+			MenuQueue(q);
 			break;
 		}
 		else
 		{
-			cout << endl;
+			cls_sreen();
+			setTextColor(4);
+			out_toando(Tuong_phai + 10, ++y+7, "TAI KHOAN HOAC MAT KHAU SAI! VUI LONG NHAP LAI!!!");
 			temp++;
 			if (temp == 3)
 			{
-				cout << "\n\t\tWRONG PASSWORD PLEASE TRY AGAIN!";
-				cout << "\n\n";
+				out_toando(Tuong_phai + 10, ++y, "BAN DA NHAP QUA 3 LAN!");
+				out_toando(Tuong_phai + 7, ++y, "HAY CHAC RANG BAN DANG DANG NHAP VOI TU CACH ADMIN");
 				break;
 			}
+			_getch();
 		}
 	}
 }
+

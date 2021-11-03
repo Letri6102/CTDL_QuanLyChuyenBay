@@ -99,6 +99,3 @@ bool Top(QUEUE& q, Ve& x)
 	x = q.pHead->data;
 	return true;
 }
-
-
-

@@ -197,8 +197,8 @@ void KhungGioiThieu()
 {
 
 	setTextColor(6);
-	out_toando(Tuong_Trai + 3, Tuong_tren, "NHOM");
-	out_toando((Tuong_phai + Tuong_Trai) / 2 + 6, Tuong_tren, "De_Tai_5");
+	out_toando(Tuong_Trai + 3, Tuong_tren, "NHOM - NYC");
+	out_toando((Tuong_phai + Tuong_Trai) / 2 + 6, Tuong_tren, "De Tai 5");
 	out_toando((Tuong_phai + Tuong_Trai) / 2 - 11, Tuong_tren + 1, "MON: Cau Truc Du Lieu");
 	out_toando(Tuong_Trai + 3, Tuong_tren + 2, "Le Cong Tri - 4601104194");
 	out_toando(Tuong_Trai + 3, Tuong_tren + 3, "Le Cong Tri - 4601104194");
@@ -250,7 +250,7 @@ void backgrout()
 		while (!f.eof())
 		{
 			getline(f, str);
-			Sleep(100);
+			//Sleep(100);
 			cout << "\n\t\t\t\t\t\t\t" << str;
 		}
 		f.close();

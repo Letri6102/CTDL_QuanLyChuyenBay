@@ -29,14 +29,12 @@ struct ChuyenBay
 	bool* dsGheTrong;
 };
 
-
 struct Ve 
 {
 	string MaVe; 
 	ChuyenBay ThongTinChuyenBay;
 	KhachHang ThongTinKhachHang;
 };
-
 
 struct TaiKhoan
 {
