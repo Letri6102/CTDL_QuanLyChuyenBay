@@ -1,9 +1,10 @@
 ﻿#include<iostream>
 #include<fstream>
 #include "QuanLy.h"
-#include "XuLy.h"
 #include "DatTra.h"
+#include "XuLy.h"
 
+#include"MainFunction.h"
 using namespace std;
 
 int main()
@@ -23,7 +24,11 @@ int main()
 	DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
 	DocFileKhachHang(dsKhachHang, soluongKhachHang);
 	DocFileTaiKhoan(dsTaiKhoan, soluongTaiKhoan);
-	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
+
+	backgrout();
+	VeKhung();
+	KhungGioiThieu();
+	KhungHuongDan();
 	//Demo + Test lỗi
 	int luachon;
 	
@@ -33,16 +38,11 @@ int main()
 		cout << "\t1.Hien thi danh sach chuyen bay" << endl;
 		cout << "\t2.Dat Ve" << endl;
 		cout << "\t3.Dang nhap Admin" << endl;
-		cout << "\t4.Xuat DS Chuyen bay" << endl;
-		cout << "\t5.Test tao ve" << endl;
-		cout << "\t6.Test Queue Dat ve";
 
 		cout << "\n\t\t  ============== End ==============" << endl;
 		cout << "Nhap lua chon = ";
 		cin >> luachon;
 
-
-		
 		switch (luachon)
 		{
 		case 1:
@@ -57,34 +57,13 @@ int main()
 		}
 		case 3:
 		{
-			DangNhap(dsTaiKhoan,soluongTaiKhoan, User, Password);
+			DangNhap(dsTaiKhoan,soluongTaiKhoan, User, Password, q);
 			break;
 		}
 		case 4:
 		{
-			XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
-			break;
-		}
-		case 5:
-		{
-			//inVe(x);
-			break;
-		}
-		case 6:
-		{
-			MenuQueue(q);
-			break;
-		}
-		case 7:
-		{
-			string MCB;
-			cin >> MCB;
-			ChuyenBay *h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MCB);
-			int soGhe;
-			cin >> soGhe;
-			DatGhe(h, soGhe);
-			DatGhe(h, 15);
-			cout << h->SanBayDen;
+			string MaCB = "VN001";
+			XuatDSGheTrong(dsChuyenBay, soluongChuyenBay, MaCB);
 		}
 		default:
 			break;
