@@ -40,9 +40,11 @@ void Xuat1ChuyenBay(ChuyenBay* b)
 void XuatDSChuyenBay(ChuyenBay* dsChuyenBay[30], int soluongChuyenBay)
 {
 	int y = Tuong_tren;
+	setTextColor(1);
 	out_toando(Tuong_phai + 2, ++y, "  MaCB       Ngay Khoi Hanh    San Bay Den       TrangThai   SoVe ");
 	for (int i = 0; i < soluongChuyenBay; i++)
 	{
+		setTextColor(15);
 		gotoXY(Tuong_phai + 4, ++y);
 		Xuat1ChuyenBay(dsChuyenBay[i]);
 	}
@@ -240,8 +242,8 @@ int soluongChuyenBay;
 //Đặt vé
 void NhapQueue(QUEUE& q, Ve x)
 {
-	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
 	DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
+	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
 	setTextColor(11);
 	cls_sreen();
 	int y = Tuong_tren;
@@ -249,10 +251,13 @@ void NhapQueue(QUEUE& q, Ve x)
 	out_toando(Tuong_phai + 10, ++y + 5, "Nhap ma chuyen bay: ");
 	cin >> x.ThongTinChuyenBay.MaChuyenBay;
 	string MaCB = x.ThongTinChuyenBay.MaChuyenBay;
+
+	//Kiểm tra mã chuyến bay hợp lệ
 	if(checkMaCB(dsChuyenBay, soluongChuyenBay, MaCB))
 	{ 
 		ChuyenBay* h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MaCB);
 
+		//Xử lý trạng thái máy bay (0,1,2,3)
 		if (TrangThai(h))
 		{
 			out_toando(Tuong_phai + 10, ++y + 6, "Nhap ho ten: ");
@@ -291,62 +296,58 @@ void XuatQueue(QUEUE q)
 		cout << x.ThongTinChuyenBay.MaChuyenBay << "\t" << x.MaVe << "\t" << x.ThongTinKhachHang.HoTen << "\t" << x.ThongTinKhachHang.CMND;
 		cout << endl;
 	}
-	if (IsEmpty(q) == true)
-	{
-		cout << "\nDANH SACH DANG RONG";
-	}
-	else
-	{
-		cout << "\nDANH SACH DANG TON TAI PHAN TU";
-	}
 }
 
+//Xử lý Admin
 void MenuQueue(QUEUE& q)
 {
 	DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
-	KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
-	int luachon;
-	while (true)
+	int luachon = 1;
+	clrscr();
+	VeKhung();
+	KhungGioiThieu();
+	KhungHuongDan();
+	toado t;
+	t.x = Tuong_Trai + 2;
+	t.y = Tuong_Giua;
+	while (luachon != 0)
 	{
-		system("cls");
-		cout << "\n\n\t\t ============== Menu ==============";
-		cout << "\n\t1. Them ve vao queue - Push";
-		cout << "\n\t2. Xuat danh sach ve ra man hinh - Pop";
-		cout << "\n\t3. Xem thong tin phan tu dau queue - Top";
-		cout << "\n\t4. Xuat danh sach chuyen bay";
-		cout << "\n\t0. Ket thuc";
-		cout << "\n\n\t\t ============== End ==============";
 
-		cout << "\nNhap lua chon: ";
-		cin >> luachon;
-		if (luachon == 1)
+		setTextColor(11);
+		out_toando(++t.x, ++t.y, "Xu ly dat ve");
+		out_toando(t.x, ++t.y, "Xu ly tra ve");
+		out_toando(t.x, ++t.y, "Thong ke");
+
+		setTextColor(11);
+		luachon = BatSuKien(++t.y);
+		cls_sreen();
+		setTextColor(15);
+		switch (luachon)
 		{
-			Ve x;
-			NhapQueue(q, x);
-		}
-		else if (luachon == 2)
+		case 1:
 		{
-			XuatQueue(q);
-			system("pause");
-		}
-		else if (luachon == 3)
-		{
+			Beep(600, 100);
 			Ve x;
 			Top(q, x);
 			cout << x.ThongTinChuyenBay.MaChuyenBay << "\t" << x.MaVe << "\t" << x.ThongTinKhachHang.HoTen << "\t" << x.ThongTinKhachHang.CMND;
 			Pop(q, x);
-			system("pause");
-		}
-		else if (luachon == 4)
-		{
-			DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
-			XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
 			break;
 		}
-		else
+		case 2:
 		{
+			Beep(600, 100);
 			break;
 		}
+		case 3:
+		{
+			Beep(600, 100);
+			break;
+		}
+		default:
+			break;
+		}
+		t.x = Tuong_Trai + 2;
+		t.y = Tuong_Giua;
 	}
 }
 
@@ -376,6 +377,7 @@ bool checkDangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, s
 	return false;
 }
 
+//Quản lý
 void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string Password, QUEUE& q)
 {
 	char x;
@@ -420,6 +422,14 @@ void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string
 		}
 		if (checkDangNhap(dsTaiKhoan,soluongTaiKhoan,User,Password)) 
 		{
+			setTextColor(2);
+			out_toando(Tuong_phai + 10, ++y + 7, "Loading");
+			for (int i = 1; i <= 10; i++)
+			{
+				cout << ".";
+				Sleep(500);
+			}
+			//Menu quản lý
 			MenuQueue(q);
 			break;
 		}
@@ -431,8 +441,9 @@ void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string
 			temp++;
 			if (temp == 3)
 			{
-				out_toando(Tuong_phai + 10, ++y, "BAN DA NHAP QUA 3 LAN!");
-				out_toando(Tuong_phai + 7, ++y, "HAY CHAC RANG BAN DANG DANG NHAP VOI TU CACH ADMIN");
+				cls_sreen();
+				out_toando(Tuong_phai + 25, ++y + 5, "BAN DA NHAP QUA 3 LAN!");
+				out_toando(Tuong_phai + 13, ++y + 6, "HAY CHAC RANG BAN DANG DANG NHAP VOI TU CACH ADMIN");
 				break;
 			}
 			_getch();
