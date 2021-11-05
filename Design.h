@@ -152,10 +152,16 @@ void ShowCur(bool CursorVisibility)
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
-void out_toando(int x, int y, string s)
+void out_toado(int x, int y, string s)
 {
 	gotoXY(x, y);
 	cout << s;
+}
+
+void out_ds(int x, int y, int s)
+{
+	gotoXY(x, y);
+	cout << s << " ";
 }
 
 // Đổi màu chữ
@@ -197,14 +203,14 @@ void KhungGioiThieu()
 {
 
 	setTextColor(6);
-	out_toando(Tuong_Trai + 3, Tuong_tren, "NHOM - NYC");
-	out_toando((Tuong_phai + Tuong_Trai) / 2 + 6, Tuong_tren, "De Tai 5");
-	out_toando((Tuong_phai + Tuong_Trai) / 2 - 11, Tuong_tren + 1, "MON: Cau Truc Du Lieu");
-	out_toando(Tuong_Trai + 3, Tuong_tren + 2, "Le Cong Tri - 4601104194");
-	out_toando(Tuong_Trai + 3, Tuong_tren + 3, "Le Cong Tri - 4601104194");
-	out_toando(Tuong_Trai + 3, Tuong_tren + 4, "Le Cong Tri - 4601104194");
-	out_toando(Tuong_Trai + 3, Tuong_tren + 5, "Le Cong Tri - 4601104194");
-	out_toando(Tuong_Trai + 3, Tuong_tren + 6, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren, "NHOM - NYC");
+	out_toado((Tuong_phai + Tuong_Trai) / 2 + 6, Tuong_tren, "De Tai 5");
+	out_toado((Tuong_phai + Tuong_Trai) / 2 - 11, Tuong_tren + 1, "MON: Cau Truc Du Lieu");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 2, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 3, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 4, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 5, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 6, "Le Cong Tri - 4601104194");
 	setTextColor(11);
 	for (int i = Tuong_Trai + 1; i < Tuong_phai - 1; i++)
 	{
@@ -221,11 +227,11 @@ void KhungHuongDan()
 		cout << (char)223;
 	}
 	setTextColor(2);
-	out_toando(Tuong_Trai + 12, 23, "Huong Dan");
-	out_toando(Tuong_Trai + 5, 24, "Di Chuyen: Phim Mui Ten");
-	out_toando(Tuong_Trai + 1, 25, "Enter: chon");
-	out_toando(Tuong_Trai + 21, 25, "ESC: Ket Thuc");
-	out_toando(Tuong_Trai + 13, 26, "F5: Reset");
+	out_toado(Tuong_Trai + 12, 23, "Huong Dan");
+	out_toado(Tuong_Trai + 5, 24, "Di Chuyen: Phim Mui Ten");
+	out_toado(Tuong_Trai + 1, 25, "Enter: chon");
+	out_toado(Tuong_Trai + 21, 25, "ESC: Ket Thuc");
+	out_toado(Tuong_Trai + 13, 26, "F5: Reset");
 	setTextColor(11);
 }
 
@@ -234,11 +240,11 @@ void cls_sreen()
 	for (int i = Tuong_tren + 1; i < Tuong_duoi - 1; i++)
 	{
 		for (int j = Tuong_phai + 1; j < Bien_Ben - 1; j++)
-			out_toando(j, i, " ");
+			out_toado(j, i, " ");
 	}
 }
 
-void backgrout()
+void background()
 {
 	setTextColor(12);
 	fstream f("BACKGROUND//introduce.txt");
@@ -264,7 +270,7 @@ int BatSuKien(int& bien)
 	toado T;
 	T.x = Tuong_Trai + 1;
 	T.y = Tuong_Giua + 1;
-	out_toando(T.x, T.y, "->");
+	out_toado(T.x, T.y, "->");
 	while (true)
 	{
 		ShowCur(0);
@@ -272,7 +278,7 @@ int BatSuKien(int& bien)
 		char key = _getch();
 		if (key == 13)
 		{
-			out_toando(cu.x, cu.y, "  ");
+			out_toado(cu.x, cu.y, "  ");
 			return T.y - Tuong_Giua;
 		}
 		else if (key == 27)
@@ -298,16 +304,16 @@ int BatSuKien(int& bien)
 			T.y++;
 			if (T.y == bien)
 				T.y = Tuong_Giua + 1;
-			out_toando(cu.x, cu.y, "  ");
-			out_toando(T.x, T.y, "->");
+			out_toado(cu.x, cu.y, "  ");
+			out_toado(T.x, T.y, "->");
 			break;
 		case 72:
 			Beep(600, 100);
 			T.y--;
 			if (T.y == Tuong_Giua)
 				T.y = bien - 1;
-			out_toando(cu.x, cu.y, "  ");
-			out_toando(T.x, T.y, "->");
+			out_toado(cu.x, cu.y, "  ");
+			out_toado(T.x, T.y, "->");
 			break;
 		}
 	}

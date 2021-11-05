@@ -18,10 +18,15 @@ void menu()
     string User, Password;
     QUEUE q;
     KhoiTaoQueue(q);
+    DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
+    DocFileKhachHang(dsKhachHang, soluongKhachHang);
+    DocFileTaiKhoan(dsTaiKhoan, soluongTaiKhoan);
+    KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
+
     Ve x;
     int luachon = 1;
 
-    backgrout();
+    background();
     VeKhung();
     KhungGioiThieu();
     KhungHuongDan();
@@ -30,15 +35,10 @@ void menu()
     t.y = Tuong_Giua;
     while (luachon != 0)
     {
-        DocFileChuyenBay(dsChuyenBay, soluongChuyenBay);
-        DocFileKhachHang(dsKhachHang, soluongKhachHang);
-        DocFileTaiKhoan(dsTaiKhoan, soluongTaiKhoan);
-        KhoiTaoGheTrong(dsChuyenBay, soluongChuyenBay);
-
         setTextColor(11);
-        out_toando(++t.x, ++t.y, "Xuat danh sach chuyen bay");
-        out_toando(t.x, ++t.y, "Dat ve");
-        out_toando(t.x, ++t.y, "Quan ly chuyen bay");
+        out_toado(++t.x, ++t.y, "Xuat danh sach chuyen bay");
+        out_toado(t.x, ++t.y, "Dat ve");
+        out_toado(t.x, ++t.y, "Quan ly chuyen bay");
 
         setTextColor(11);
         luachon = BatSuKien(++t.y);
@@ -49,12 +49,7 @@ void menu()
         case 1:
         {
             Beep(600, 100);
-            //XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
-            //_getch();
-            string MaCB = "VN001";
-            ChuyenBay* h = TimKiemChuyenBay(dsChuyenBay, soluongChuyenBay, MaCB);
-            DatGhe(h, 2);
-            DSGheTrong(h);
+            XuatDSChuyenBay(dsChuyenBay, soluongChuyenBay);
             break;
         }
         case 2:
@@ -66,7 +61,7 @@ void menu()
         case 3: 
         {
             Beep(600, 100);
-            DangNhap(dsTaiKhoan, soluongTaiKhoan, User, Password, q);
+            DangNhap(dsTaiKhoan, soluongTaiKhoan, User, Password, q, x, dsChuyenBay, soluongChuyenBay, dsKhachHang, soluongKhachHang);
             break;
         }
         default:

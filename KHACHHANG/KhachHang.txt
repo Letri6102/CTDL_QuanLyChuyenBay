@@ -1,5 +1,22 @@
-1	3120493204	LeCongTri
-2	3120519091	TrinhThiHongCuc
-3	3120154568	NguyenThanhTuan
-4	3120453148	LeTrungHieu
-5	3124562541	TranTanTrung
+1     3120493204    LeCongTri		VN001
+2     3120519091    TrinhHongCuc	VN001
+3     3120154568    NguyenThanhTuan	VN002
+4     3120453148    LeTrungHieu		VN003
+5     3124562541    TranTanTrung	VN004
+6     3120514203    TruongQuangSinh	VN005
+7     3120668786    BuiHoangTu		VN006
+8     3120741379    TranCongMinh	VN007
+9     3120925571    NguyenQuangMinh	VN008
+10    3120431382    TranHoangHieu	VN009
+11    3120782275    TranCongLan		VN010
+12    3120668101    LeNgocHoaBinh	VN011
+13    3120352155    BuiThanhTri		VN012
+14    3120373461    TrinhTrungTuan	VN013
+15    3121625027    NguyenDinhMinh	VN014
+16    3120204703    TranHongThi		VN015
+17    3120212281    NguyenAnhKiet	VN015
+18    3120304613    LeAnhSinh		VN016
+19    3120958403    LeThiNgocCuc	VN001
+20    3124286133    NguyenHoangCuc	VN002
+21    3120244413    NguyenHoaiTam	VN001
+22    3120912135    LeHoaiNiem		VN003

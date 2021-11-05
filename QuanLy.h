@@ -16,6 +16,7 @@ struct KhachHang
 	int STT;
 	string CMND;
 	string HoTen;
+	string MaChuyenBay;
 };
 
 struct ChuyenBay
@@ -24,7 +25,7 @@ struct ChuyenBay
 	string SoHieuMayBay;
 	string NgayKhoiHanh;
 	string SanBayDen;
-	int TrangThai; //0: Huy chuyen      1: Con ve		2: Het ve		3: Hoan tat
+	int TrangThai; //0: Huy chuyen      1: Con ve		2: Het ve	   3: Hoan tat
 	int dsVe;
 	bool* dsGheTrong;
 };
@@ -34,6 +35,7 @@ struct Ve
 	string MaVe; 
 	ChuyenBay ThongTinChuyenBay;
 	KhachHang ThongTinKhachHang;
+	int soGhe;
 };
 
 struct TaiKhoan
