@@ -330,10 +330,22 @@ void XuatDSGheTrong(QUEUE& q, Ve x, ChuyenBay* dsChuyenBay[30], int soluongChuye
 	gotoXY(Tuong_phai + 4, ++y);
 	for (int i = 1; i <= 10; i++)
 	{
-		if (h->dsGheTrong[i] == false)
-			cout << i << " ";
-		else
-			cout << "-1" << " ";
+		cout << i << " ";
+	}
+	gotoXY(Tuong_phai + 4, ++y + 2);
+	for (int i = 11; i <= 20; i++)
+	{
+		cout << i << " ";
+	}
+	gotoXY(Tuong_phai + 4, ++y + 4);
+	for (int i = 21; i <= 30; i++)
+	{
+		cout << i << " ";
+	}
+	gotoXY(Tuong_phai + 4, ++y + 6);
+	for (int i = 31; i <= 40; i++)
+	{
+		cout << i << " ";
 	}
 }
 
@@ -372,7 +384,12 @@ void MenuThongKe(QUEUE& q, Ve x, ChuyenBay* dsChuyenBay[30], int soluongChuyenBa
 		case 2:
 		{
 			Beep(600, 100);
-			string MaCB = "VN001";
+			string MaCB;
+			setTextColor(15);
+			int y = Tuong_tren;
+			cls_sreen();
+			out_toado(Tuong_phai + 2, ++y, "Nhap ma chuyen bay: ");
+			cin >> MaCB;
 			XuatDSGheTrong(q,x,dsChuyenBay, soluongChuyenBay, MaCB);
 			break;
 		}
@@ -529,7 +546,7 @@ void DangNhap(TaiKhoan* dsTaiKhoan[20], int soluongTaiKhoan, string User, string
 			for (int i = 1; i <= 15; i++)
 			{
 				cout << ".";
-				//Sleep(400);
+				Sleep(400);
 			}
 			//Menu quản lý
 			MenuQueue(q,v,dsChuyenBay,soluongChuyenBay, dsKhachHang, soluongKhachHang);

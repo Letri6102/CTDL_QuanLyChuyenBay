@@ -207,10 +207,10 @@ void KhungGioiThieu()
 	out_toado((Tuong_phai + Tuong_Trai) / 2 + 6, Tuong_tren, "De Tai 5");
 	out_toado((Tuong_phai + Tuong_Trai) / 2 - 11, Tuong_tren + 1, "MON: Cau Truc Du Lieu");
 	out_toado(Tuong_Trai + 3, Tuong_tren + 2, "Le Cong Tri - 4601104194");
-	out_toado(Tuong_Trai + 3, Tuong_tren + 3, "Le Cong Tri - 4601104194");
-	out_toado(Tuong_Trai + 3, Tuong_tren + 4, "Le Cong Tri - 4601104194");
-	out_toado(Tuong_Trai + 3, Tuong_tren + 5, "Le Cong Tri - 4601104194");
-	out_toado(Tuong_Trai + 3, Tuong_tren + 6, "Le Cong Tri - 4601104194");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 3, "Tran Tan Trung - 4601104202");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 4, "Nguyen Thanh Tuan - 4601104210");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 5, "Le Trung Hieu - 4601104055");
+	out_toado(Tuong_Trai + 3, Tuong_tren + 6, "Truong Quang Sinh - 4601104154");
 	setTextColor(11);
 	for (int i = Tuong_Trai + 1; i < Tuong_phai - 1; i++)
 	{
@@ -256,7 +256,7 @@ void background()
 		while (!f.eof())
 		{
 			getline(f, str);
-			//Sleep(100);
+			Sleep(100);
 			cout << "\n\t\t\t\t\t\t\t" << str;
 		}
 		f.close();
